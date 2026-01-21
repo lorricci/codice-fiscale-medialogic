@@ -1,0 +1,124 @@
+{
+  "info": {
+    "_postman_id": "fc344caf-a094-4219-a4b2-3f970dfc2373",
+    "name": "CodiceFiscale",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "41363306"
+  },
+  "item": [
+    {
+      "name": "EstrattoreApi",
+      "item": [
+        {
+          "name": "Estrai Data Di Nascita",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{contextPath}}/estrattore?codiceFiscale=FRRMRC88R45H501C",
+              "host": [
+                "{{baseUrl}}{{contextPath}}"
+              ],
+              "path": [
+                "estrattore"
+              ],
+              "query": [
+                {
+                  "key": "codiceFiscale",
+                  "value": "FRRMRC88R45H501C",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GeneratoreApi",
+      "item": [
+        {
+          "name": "Genera Codice Fiscale",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{contextPath}}/generatore",
+              "host": [
+                "{{baseUrl}}{{contextPath}}"
+              ],
+              "path": [
+                "generatore"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ValidatoreApi",
+      "item": [
+        {
+          "name": "Valida Codice Fiscale",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{contextPath}}/validatore?codiceFiscale=FRRMRC88R45H501C",
+              "host": [
+                "{{baseUrl}}{{contextPath}}"
+              ],
+              "path": [
+                "validatore"
+              ],
+              "query": [
+                {
+                  "key": "codiceFiscale",
+                  "value": "FRRMRC88R45H501C",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "contextPath",
+      "value": ""
+    }
+  ]
+}
