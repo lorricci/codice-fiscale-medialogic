@@ -26,10 +26,6 @@ class EstrattoreServiceTest {
 
     private final IEstrattoreService estrattoreService;
 
-    private final String etaDaVerificareMessage = "Età da verificare: {}";
-    private final String annoCorrettoMessage = "Anno di nascita corretto.";
-    private final String etaCorrettaMessage = "Età corretta.";
-
     @Test
     void testEstrazioneCfNonValido() {
         // Verifichiamo semplicemente che lanci l'eccezione. I test di validazione avvengono in ValidatoreServiceTest
@@ -40,43 +36,52 @@ class EstrattoreServiceTest {
 
     @Test
     void testEstrazioneDaCodiceFiscaleLista_01() {
+        // Setup CF e data di nascita
         String codiceFiscale = "MROSSI80A01H501U";
         LocalDate dataNascita = LocalDate.of(1980, 1, 1);
         log.info("Data di nascita da verificare: 01/01/1980");
-        Integer eta = Period.between(dataNascita, LocalDate.now()).getYears();
-        log.info(etaDaVerificareMessage, eta);
+        // Setup differenza ed estrazione
+        Period differenza = Period.between(dataNascita, LocalDate.now());
         EstrattoreDto dati = Assertions.assertDoesNotThrow(() -> estrattoreService.estraiDataNascitaEta(codiceFiscale));
-        Assertions.assertEquals(dati.getDataNascita(), dataNascita);
-        log.info(annoCorrettoMessage);
-        Assertions.assertEquals(dati.getEta(), eta);
-        log.info(etaCorrettaMessage);
+        // Assertions
+        eseguiAssertions(dati, dataNascita, differenza);
     }
 
     @Test
     void testEstrazioneDaCodiceFiscaleLista_02() {
+        // Setup CF e data di nascita
         String codiceFiscale = "BNCGNN95E15L219O";
         LocalDate dataNascita = LocalDate.of(1995, 5, 15);
         log.info("Data di nascita da verificare: 15/05/1995");
-        Integer eta = Period.between(dataNascita, LocalDate.now()).getYears();
-        log.info(etaDaVerificareMessage, eta);
+        // Setup differenza ed estrazione
+        Period differenza = Period.between(dataNascita, LocalDate.now());
         EstrattoreDto dati = Assertions.assertDoesNotThrow(() -> estrattoreService.estraiDataNascitaEta(codiceFiscale));
-        Assertions.assertEquals(dati.getDataNascita(), dataNascita);
-        log.info(annoCorrettoMessage);
-        Assertions.assertEquals(dati.getEta(), eta);
-        log.info(etaCorrettaMessage);
+        // Assertions
+        eseguiAssertions(dati, dataNascita, differenza);
     }
 
     @Test
     void testEstrazioneDaCodiceFiscaleLista_03() {
+        // Setup CF e data di nascita
         String codiceFiscale = "RCCLNZ06H04H501U";
         LocalDate dataNascita = LocalDate.of(2006, 6, 4);
         log.info("Data di nascita da verificare: 04/06/2006");
-        Integer eta = Period.between(dataNascita, LocalDate.now()).getYears();
-        log.info(etaDaVerificareMessage, eta);
+        // Setup differenza ed estrazione
+        Period differenza = Period.between(dataNascita, LocalDate.now());
         EstrattoreDto dati = Assertions.assertDoesNotThrow(() -> estrattoreService.estraiDataNascitaEta(codiceFiscale));
+        // Assertions
+        eseguiAssertions(dati, dataNascita, differenza);
+    }
+
+    /**
+     * Esegue i test su data di nascita ed età
+     */
+    private void eseguiAssertions(EstrattoreDto dati, LocalDate dataNascita, Period differenza) {
         Assertions.assertEquals(dati.getDataNascita(), dataNascita);
-        log.info(annoCorrettoMessage);
-        Assertions.assertEquals(dati.getEta(), eta);
-        log.info(etaCorrettaMessage);
+        log.info("Data di nascita corretta.");
+        Assertions.assertEquals(dati.getEta().getAnni(), differenza.getYears());
+        Assertions.assertEquals(dati.getEta().getMesi(), differenza.getMonths());
+        Assertions.assertEquals(dati.getEta().getGiorni(), differenza.getDays());
+        log.info("L'età è corretta.");
     }
 }

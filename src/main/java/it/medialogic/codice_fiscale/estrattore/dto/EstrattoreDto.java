@@ -5,10 +5,15 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+/**
+ * Risultato dell'estrazione dati da un codice fiscale
+ *
+ * @author Lorenzo Ricci
+ */
 @Data
 @Builder
 public class EstrattoreDto {
 
     private LocalDate dataNascita;
-    private Integer eta;
+    private EtaDto eta;
 }

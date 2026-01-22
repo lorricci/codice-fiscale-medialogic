@@ -1,6 +1,7 @@
 package it.medialogic.codice_fiscale.estrattore.service;
 
 import it.medialogic.codice_fiscale.estrattore.dto.EstrattoreDto;
+import it.medialogic.codice_fiscale.estrattore.dto.EtaDto;
 import it.medialogic.codice_fiscale.exception.RestServiceException;
 import it.medialogic.codice_fiscale.validatore.service.IValidatoreService;
 import jakarta.annotation.PostConstruct;
@@ -49,9 +50,15 @@ public class EstrattoreService implements IEstrattoreService {
                 estraiGiornoDaDataNascita(dataNascita)
         );
         // Costruisce la risposta
+        Period differenza = Period.between(data, LocalDate.now());
         return EstrattoreDto.builder()
                 .dataNascita(data)
-                .eta(Period.between(data, LocalDate.now()).getYears())
+                .eta(EtaDto.builder()
+                        .giorni(differenza.getDays())
+                        .mesi(differenza.getMonths())
+                        .anni(differenza.getYears())
+                        .build()
+                )
                 .build();
     }
 

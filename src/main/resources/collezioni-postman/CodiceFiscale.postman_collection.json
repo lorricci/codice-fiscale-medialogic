@@ -114,11 +114,11 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": ""
+      "value": "http://localhost:9091"
     },
     {
       "key": "contextPath",
-      "value": ""
+      "value": "/api/v1/codice-fiscale"
     }
   ]
 }

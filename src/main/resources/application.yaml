@@ -1,2 +1,4 @@
 spring.application.name: codice-fiscale
 server.port: 9091
+server.servlet.context-path: /api/v1/codice-fiscale
+springdoc.swagger-ui.path: /swagger-ui.html
